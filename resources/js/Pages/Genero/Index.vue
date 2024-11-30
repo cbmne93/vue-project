@@ -1,18 +1,55 @@
-<script setup>
+<script>
 
-import { Link } from '@inertiajs/vue3';
+import { Link, router } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Pagination from '@/Shared/Pagination.vue';
+import ConfirmationModal from '@/Components/ConfirmationModal.vue';
+import DangerButton from '@/Components/DangerButton.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
 
 
-const props = defineProps({
-    generos: Object,
-});
+export default {
+    components: {
+        AppLayout, Pagination, ConfirmationModal, DangerButton, SecondaryButton, Link
+    },
+    props: {
+        generos: Object,
+    },
+    data() {
+        return {
+            confirmDeleteActive: false,
+            deleteGeneroRow: ""
+        }
+    },
+    methods: {
+        deleteGenero() {
+            router.delete(route('genero.destroy', this.deleteGeneroRow))
+            this.confirmDeleteActive = false;
+        }
+    }
+}
 
 
 </script>
 
 <template>
+
+    <ConfirmationModal :show="confirmDeleteActive">
+        <template v-slot:title>
+            CONFIRMAR
+        </template>
+        <template v-slot:content>
+            <p class="p-4">ESTAS SEGURO DE ELIMINAR EL REGISTRO?</p>
+        </template>
+        <template v-slot:footer>
+            <div class="flex flex-row-reverse bg-gray-100 gap-3">
+                <DangerButton @click="deleteGenero()">Eliminar</DangerButton>
+                <SecondaryButton @click="confirmDeleteActive = false">Cancelar</SecondaryButton>
+            </div>
+        </template>
+    </ConfirmationModal>
+
+
     <AppLayout title="Genero">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -30,16 +67,15 @@ const props = defineProps({
 
                 <!-- BOTON CREAR -->
                 <div class="flex items-center justify-end mt-2">
-                    <Link :href="route('genero.create')"
-                        class="btn-nuevo">
+                    <Link :href="route('genero.create')" class="btn-nuevo">
                     Nuevo
                     </Link>
                 </div>
 
                 <!-- TABLA DE CONTENIDO -->
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mt-4">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <table class="table-content">
+                        <thead class="table-thead">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
                                     Id
@@ -56,8 +92,7 @@ const props = defineProps({
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="g in generos.data" :key="g.id"
-                                class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                            <tr v-for="g in generos.data" :key="g.id" class="table-tbody-tr">
                                 <th scope="row"
                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ g.id }}
@@ -71,14 +106,13 @@ const props = defineProps({
                                 <td class="px-6 py-4">
 
                                     <Link :href="route('genero.edit', g)"
-                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                    Edit
+                                        class="mr-3 font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                    <i class="fas fa-edit"></i>
                                     </Link>
-                                    <Link  method="DELETE" as="button" :href="route('genero.destroy', g)"
-                                        class="font-medium text-red-600 dark:text-red-500 hover:underline">
-                                    Eliminar
-                                    </Link>
-
+                                    <button class="mr-3 font-medium text-red-600 dark:text-red-500 hover:underline"
+                                        @click="confirmDeleteActive = true; deleteGeneroRow = g.id">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
                                 </td>
                             </tr>
 

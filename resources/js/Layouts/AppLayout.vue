@@ -321,7 +321,7 @@ const logout = () => {
             <main>
                 <div v-if="visibleFlashContainer">
                     <div v-if="$page.props.flash.message && hideFlashMessage()"
-                        class="container m-auto my-2 px-4 py-3 bg-green-300 text-green-800 rounded shadow">
+                        class="container m-auto my-2 px-4 py-3 bg-green-200 text-green-800 font-semibold rounded shadow">
                         {{ $page.props.flash.message }}
                     </div>
                 </div>

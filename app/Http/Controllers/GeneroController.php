@@ -27,7 +27,7 @@ class GeneroController extends Controller
     {
 
         Genero::create($request->validated());
-        return redirect()->route('genero.index');
+        return to_route('genero.index')->with('message', 'REGISTRO CREADO!');
     }
 
    
