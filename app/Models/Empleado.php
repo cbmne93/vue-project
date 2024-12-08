@@ -12,7 +12,7 @@ class Empleado extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['cedula', 'nombre', 'apellido', 'image', 'cargo_id', 'genero_id'];
+    protected $fillable = ['cedula', 'nombre', 'apellido', 'date', 'image', 'cargo_id', 'genero_id'];
 
 
     public function cargo()

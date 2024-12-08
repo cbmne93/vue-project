@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -16,6 +17,7 @@ return new class extends Migration
             $table->string('cedula');
             $table->string('nombre');
             $table->string('apellido');
+            $table->string('date')->default(Carbon::now());
             $table->string('image')->nullable();
             $table->foreignId('cargo_id')->constrained();
             $table->foreignId('genero_id')->constrained();

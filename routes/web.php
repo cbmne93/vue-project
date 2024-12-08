@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\GeneroController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\CargoController;
+use App\Http\Controllers\GeneroController;
+use App\Http\Controllers\EmpleadoController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -24,6 +26,9 @@ Route::middleware([
     })->name('dashboard');
 
     Route::resource('/genero', GeneroController::class)->names('genero');
+    Route::resource('/empleado', EmpleadoController::class)->names('empleado');
+    Route::resource('/cargo', CargoController::class)->names('cargo');
+
 });
 
 /* Route::middleware([

@@ -2,64 +2,56 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Cargo\StoreRequest;
+use App\Http\Requests\Cargo\UpdateRequest;
 use App\Models\Cargo;
-use Illuminate\Http\Request;
+
 
 class CargoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        $cargos = Cargo::paginate(8);
+        return inertia("Cargo/Index", compact('cargos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
-        //
+        return inertia("Cargo/Create");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+
+    public function store(StoreRequest $request)
     {
-        //
+        Cargo::create($request->validated());
+        return to_route('cargo.index')->with('message', 'REGISTRO CREADO!');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Cargo $cargo)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(Cargo $cargo)
     {
-        //
+        return inertia("Cargo/Edit", compact('cargo'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Cargo $cargo)
+
+    public function update(UpdateRequest $request, Cargo $cargo)
     {
-        //
+
+        $cargo->update($request->validated());
+        return to_route('cargo.index')->with('message', 'REGISTRO ACTUALIZADO!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Cargo $cargo)
     {
-        //
+       /*  $cargo->update(['state' => 'Inactivo']);
+        dd($cargo); */
     }
 }

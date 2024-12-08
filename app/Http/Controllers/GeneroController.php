@@ -50,9 +50,7 @@ class GeneroController extends Controller
         return to_route('genero.index')->with('message', 'REGISTRO ACTUALIZADO!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+   
     public function destroy(Genero $genero)
     {
         $genero->delete();
