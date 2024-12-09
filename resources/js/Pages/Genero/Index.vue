@@ -3,14 +3,11 @@
 import { Link, router } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Pagination from '@/Shared/Pagination.vue';
-import ConfirmationModal from '@/Components/ConfirmationModal.vue';
-import DangerButton from '@/Components/DangerButton.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
 
 
 export default {
     components: {
-        AppLayout, Pagination, ConfirmationModal, DangerButton, SecondaryButton, Link
+        AppLayout, Pagination, Link
     },
     props: {
         generos: Object,
@@ -34,33 +31,11 @@ export default {
 
 <template>
 
-    <ConfirmationModal :show="confirmDeleteActive">
-        <template v-slot:title>
-            CONFIRMAR
-        </template>
-        <template v-slot:content>
-            <p class="p-4">ESTAS SEGURO DE ELIMINAR EL REGISTRO?</p>
-        </template>
-        <template v-slot:footer>
-            <div class="flex flex-row-reverse bg-gray-100 gap-3">
-                <DangerButton @click="deleteGenero()">Eliminar</DangerButton>
-                <SecondaryButton @click="confirmDeleteActive = false">Cancelar</SecondaryButton>
-            </div>
-        </template>
-    </ConfirmationModal>
-
-
     <AppLayout title="Genero">
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                Genero
-            </h2>
-        </template>
-
-
+    
         <div class="caja">
             <h1 class="text-3xl font-semibold text-gray-700 mb-3 mt-4">
-                <span class="text-indigo-500">Generos /</span>Listado
+                <span class="text-indigo-500">Generos </span>
             </h1>
 
             <div class="card">
@@ -109,10 +84,11 @@ export default {
                                         class="mr-3 font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                     <i class="fas fa-edit"></i>
                                     </Link>
-                                    <button class="mr-3 font-medium text-red-600 dark:text-red-500 hover:underline"
-                                        @click="confirmDeleteActive = true; deleteGeneroRow = g.id">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
+                                    <Link :href="route('genero.show', g)"
+                                        class="mr-3 font-black text-green-600 dark:text-green-500 hover:underline">
+                                    <i class="fa-solid fa-eye"></i>
+                                    </Link>
+
                                 </td>
                             </tr>
 

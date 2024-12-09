@@ -12,8 +12,23 @@ class CargoController extends Controller
 
     public function index()
     {
-        $cargos = Cargo::paginate(8);
-        return inertia("Cargo/Index", compact('cargos'));
+
+        $search = request('search');
+
+        $cargos = Cargo::where('id', '>=', 1);
+
+        if (request('search')) {
+            $cargos->where(function ($query) {
+                $query->orWhere('des_cargo', 'like', "%" . request('search') . "%");
+            });
+        }
+
+        $cargos = $cargos->orderBy('state')->paginate(8);
+
+        return inertia("Cargo/Index", [
+            'cargos' => $cargos,
+            'prop_search' => $search,
+        ]);
     }
 
 
@@ -26,12 +41,12 @@ class CargoController extends Controller
     public function store(StoreRequest $request)
     {
         Cargo::create($request->validated());
-        return to_route('cargo.index')->with('message', 'REGISTRO CREADO!');
+        return to_route('cargo.index')->with('message', 'REGISTRO CREADO CON EXITO!');
     }
 
     public function show(Cargo $cargo)
     {
-        //
+        return inertia("Cargo/Show", compact('cargo'));
     }
 
 
@@ -45,13 +60,7 @@ class CargoController extends Controller
     {
 
         $cargo->update($request->validated());
-        return to_route('cargo.index')->with('message', 'REGISTRO ACTUALIZADO!');
+        return to_route('cargo.index')->with('message', 'REGISTRO ACTUALIZADO CON EXITO!');
     }
 
-
-    public function destroy(Cargo $cargo)
-    {
-       /*  $cargo->update(['state' => 'Inactivo']);
-        dd($cargo); */
-    }
 }

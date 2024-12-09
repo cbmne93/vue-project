@@ -27,13 +27,13 @@ class GeneroController extends Controller
     {
 
         Genero::create($request->validated());
-        return to_route('genero.index')->with('message', 'REGISTRO CREADO!');
+        return to_route('genero.index')->with('message', 'REGISTRO CREADO CON EXITO!');
     }
 
    
     public function show(Genero $genero)
     {
-        //
+        return inertia("Genero/Show", compact('genero'));
     }
 
   
@@ -47,7 +47,7 @@ class GeneroController extends Controller
     {
         $genero->update($request->validated());
 
-        return to_route('genero.index')->with('message', 'REGISTRO ACTUALIZADO!');
+        return to_route('genero.index')->with('message', 'REGISTRO ACTUALIZADO CON EXITO!');
     }
 
    

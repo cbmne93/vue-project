@@ -15,7 +15,7 @@ const cargo = props.cargo;
 
 const form = useForm({
     des_cargo: cargo.des_cargo,
-
+    state: cargo.state,
 });
 
 
@@ -28,12 +28,6 @@ const submit = () => {
 
 <template>
     <AppLayout title="Cargo">
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                Cargo
-            </h2>
-        </template>
-
 
         <div class="caja">
             <h1 class="text-3xl font-semibold text-gray-700 mb-3 mt-4">
@@ -43,13 +37,21 @@ const submit = () => {
             <div class="card">
 
                 <form @submit.prevent="submit">
-                    <div class="grid grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 gap-6">
 
                         <div>
                             <InputLabel for="des_cargo" value="Descripcion" />
-                            <TextInput id="des_genero" v-model="form.des_cargo" type="text"
-                                class="mt-1 block w-full" />
+                            <TextInput id="des_genero" v-model="form.des_cargo" type="text" class="mt-1 block w-full" />
                             <InputError class="mt-2" :message="form.errors.des_cargo" />
+                        </div>
+
+                        <div>
+                            <InputLabel for="state" value="Estado" />
+                            <select v-model="form.state" class="rounded-md w-full border-gray-300">
+                                <option value="ACTIVO">ACTIVO</option>
+                                <option value="INACTIVO">INACTIVO</option>
+                            </select>
+                            <InputError class="mt-2" :message="form.errors.state" />
                         </div>
 
                     </div>

@@ -3,7 +3,6 @@
 import { Link, router } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Pagination from '@/Shared/Pagination.vue';
-import ConfirmationModal from '@/Components/ConfirmationModal.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
@@ -13,7 +12,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 
 export default {
     components: {
-        AppLayout, Pagination, ConfirmationModal, DangerButton, SecondaryButton, Link, InputLabel, TextInput, PrimaryButton
+        AppLayout, Pagination, DangerButton, SecondaryButton, Link, InputLabel, TextInput, PrimaryButton
     },
 
     props: {
@@ -53,30 +52,8 @@ export default {
 
 <template>
 
-    <ConfirmationModal :show="confirmDeleteActive">
-        <template v-slot:title>
-            CONFIRMAR
-        </template>
-        <template v-slot:content>
-            <p class="p-4">ESTAS SEGURO DE ELIMINAR EL REGISTRO?</p>
-        </template>
-        <template v-slot:footer>
-            <div class="flex flex-row-reverse bg-gray-100 gap-3">
-                <DangerButton @click="deleteGenero()">Eliminar</DangerButton>
-                <SecondaryButton @click="confirmDeleteActive = false">Cancelar</SecondaryButton>
-            </div>
-        </template>
-    </ConfirmationModal>
-
-
     <AppLayout title="Empleado">
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                Empleado
-            </h2>
-        </template>
-
-
+       
         <div class="caja">
             <h1 class="text-3xl font-semibold text-gray-700 mb-3 mt-4">
                 <span class="text-indigo-500">Empleados /</span>Listado

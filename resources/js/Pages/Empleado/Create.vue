@@ -32,13 +32,7 @@ const props = defineProps({
 
 <template>
     <AppLayout title="Empleado">
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                Empleado
-            </h2>
-        </template>
-
-
+    
         <div class="caja">
             <h1 class="text-3xl font-semibold text-gray-700 mb-3 mt-4">
                 <span class="text-indigo-500">Empleados /</span>Crear
@@ -71,7 +65,7 @@ const props = defineProps({
                         </div>
                         <div>
                             <InputLabel for="cargo_id" value="Cargo" />
-                            <select v-model="form.cargo_id" class="rounded-md w-full border-gray-50">
+                            <select v-model="form.cargo_id" class="rounded-md w-full border-gray-300">
                                 <option value="" selected disabled>Seleccionar una opcion</option>
                                 <option v-for="c in cargos" :key="c.id" :value="c.id">{{ c.des_cargo }}</option>
                             </select>
@@ -79,7 +73,7 @@ const props = defineProps({
                         </div>
                         <div>
                             <InputLabel for="genero_id" value="Genero" />
-                            <select v-model="form.genero_id" class="rounded-md w-full border-gray-50">
+                            <select v-model="form.genero_id" class="rounded-md w-full border-gray-300">
                                 <option value="" selected disabled>Seleccionar una opcion</option>
                                 <option v-for="g in generos" :key="g.id" :value="g.id">{{ g.des_genero }}</option>
                             </select>

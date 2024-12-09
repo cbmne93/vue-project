@@ -23,6 +23,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'des_cargo' => 'required|min:2|unique:cargos,des_cargo,'.$this->route('cargo')->id,
+            'state' => 'required'
         ];
     }
 }

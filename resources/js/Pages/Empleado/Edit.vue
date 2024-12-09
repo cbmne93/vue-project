@@ -35,13 +35,7 @@ const submit = () => {
 
 <template>
     <AppLayout title="Empleado">
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                Empleado
-            </h2>
-        </template>
-
-
+       
         <div class="caja">
             <h1 class="text-3xl font-semibold text-gray-700 mb-3 mt-4">
                 <span class="text-indigo-500">Empleado /</span>Editar

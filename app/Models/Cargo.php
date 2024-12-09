@@ -11,7 +11,7 @@ class Cargo extends Model
 
     use HasFactory;
 
-    protected $fillable = ['des_cargo'];
+    protected $fillable = ['des_cargo', 'state'];
 
     public function empleados()
     {
