@@ -3,8 +3,6 @@
 import { Link, router } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Pagination from '@/Shared/Pagination.vue';
-import DangerButton from '@/Components/DangerButton.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
@@ -12,7 +10,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 
 export default {
     components: {
-        AppLayout, Pagination, DangerButton, SecondaryButton, Link, InputLabel, TextInput, PrimaryButton
+        AppLayout, Pagination, Link, InputLabel, TextInput, PrimaryButton
     },
 
     props: {
@@ -25,18 +23,12 @@ export default {
 
     data() {
         return {
-            confirmDeleteActive: false,
-            deleteRow: "",
             date_from: this.prop_date_from,
             date_to: this.prop_date_to,
             search: this.prop_search
         }
     },
     methods: {
-        deleteEmpleado() {
-            router.delete(route('empleado.destroy', this.deleteRow))
-            this.confirmDeleteActive = false;
-        },
         customSearch() {
             router.get(route('empleado.index', {
                 date_from: this.date_from,
@@ -53,48 +45,47 @@ export default {
 <template>
 
     <AppLayout title="Empleado">
-       
+
         <div class="caja">
             <h1 class="text-3xl font-semibold text-gray-700 mb-3 mt-4">
-                <span class="text-indigo-500">Empleados /</span>Listado
+                <span class="text-indigo-500">Empleados </span>
             </h1>
 
             <div class="card">
 
                 <!-- BOTON CREAR -->
-                <div class="flex items-center justify-end mt-2">
+                <div class=" px-6 py-4 flex items-center justify-start">
                     <Link :href="route('empleado.create')" class="btn-nuevo">
                     Nuevo
                     </Link>
                 </div>
 
                 <!-- FILTROS -->
-                <div class="grid grid-cols-3 gap-4">
+                <div class="px-6 py-4 flex items-center">
 
                     <div>
                         <InputLabel for="date_from" value="Fecha Desde" />
                         <TextInput id="date_from" v-model="date_from" type="date" class="mt-1 block w-full" />
                     </div>
-                    <div>
+                    <div class="mx-2">
                         <InputLabel for="date_to" value="Fecha Hasta" />
                         <TextInput id="date_to" v-model="date_to" type="date" class="mt-1 block w-full" />
+                    </div>
+                    <div class="flex-1 mt-4 mx-2">
+                        <TextInput v-model="search" type="text" placeholder="Ingrese un texto para la busqueda"
+                            class="mt-1 block w-full" />
                     </div>
 
                     <div class="mt-6 space-x-2">
                         <PrimaryButton @click="customSearch">Filtrar</PrimaryButton>
-                        <Link :href="route('empleado.index')" class="btn-limpiar">
+                        <Link :href="route('empleado.index')" class="btn-white">
                         Limpiar
                         </Link>
                     </div>
 
                 </div>
 
-                <div class="w-full mt-4">
-                    <!--  <TextInput autofocus @keyup="customSearch" v-model="search" type="text" placeholder="Ingrese un texto para la busqueda"
-                        class="mt-1 block w-full" /> -->
-                    <TextInput autofocus v-debounce.500ms="customSearch" :debounce-events="['keyup']" v-model="search"
-                        type="text" placeholder="Ingrese un texto para la busqueda" class="mt-1 block w-full" />
-                </div>
+
 
                 <!-- TABLA DE CONTENIDO -->
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -108,7 +99,7 @@ export default {
                                     Cedula
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Nombre
+                                    Nombres
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Apellidos
@@ -137,13 +128,13 @@ export default {
                                     {{ e.cedula }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ e.nombre }}
+                                    {{ e.primer_nombre + ' ' + e.segundo_nombre }} 
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ e.apellido }}
+                                    {{ e.primer_apellido + ' ' + e.segundo_apellido }} 
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ e.date }}
+                                    {{ e.fecha_entrada }}
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ e.cargo.des_cargo }}
@@ -158,10 +149,10 @@ export default {
                                         class="mr-3 font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                     <i class="fas fa-edit"></i>
                                     </Link>
-                                    <button class="mr-3 font-medium text-red-600 dark:text-red-500 hover:underline"
-                                        @click="confirmDeleteActive = true; deleteRow = e.id">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
+                                    <Link :href="route('empleado.show', e)"
+                                        class="mr-3 font-black text-green-600 dark:text-green-500 hover:underline">
+                                    <i class="fa-solid fa-eye"></i>
+                                    </Link>
                                 </td>
                             </tr>
 

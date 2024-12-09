@@ -17,9 +17,11 @@ const empleado = props.empleado;
 
 const form = useForm({
     cedula: empleado.cedula,
-    nombre: empleado.nombre,
-    apellido: empleado.apellido,
-    date: empleado.date,
+    primer_nombre: empleado.primer_nombre,
+    segundo_nombre: empleado.segundo_nombre,
+    primer_apellido: empleado.primer_apellido,
+    segundo_apellido: empleado.segundo_apellido,
+    fecha_entrada: empleado.fecha_entrada,
     cargo_id: empleado.cargo_id,
     genero_id: empleado.genero_id,
 
@@ -53,23 +55,33 @@ const submit = () => {
                             <InputError class="mt-2" :message="form.errors.cedula" />
                         </div>
                         <div>
-                            <InputLabel for="nombre" value="Nombre" />
-                            <TextInput id="nombre" v-model="form.nombre" type="text" class="mt-1 block w-full" />
-                            <InputError class="mt-2" :message="form.errors.nombre" />
+                            <InputLabel for="primer_nombre" value="Primer Nombre" />
+                            <TextInput id="primer_nombre" v-model="form.primer_nombre" type="text" class="mt-1 block w-full" />
+                            <InputError class="mt-2" :message="form.errors.primer_nombre" />
                         </div>
                         <div>
-                            <InputLabel for="apellido" value="Apellido" />
-                            <TextInput id="apellido" v-model="form.apellido" type="text" class="mt-1 block w-full" />
-                            <InputError class="mt-2" :message="form.errors.apellido" />
+                            <InputLabel for="segundo_nombre" value="Segundo Nombre" />
+                            <TextInput id="segundo_nombre" v-model="form.segundo_nombre" type="text" class="mt-1 block w-full" />
+                            <InputError class="mt-2" :message="form.errors.segundo_nombre" />
                         </div>
                         <div>
-                            <InputLabel for="date" value="Fecha" />
-                            <TextInput id="date" v-model="form.date" type="date" class="mt-1 block w-full" />
-                            <InputError class="mt-2" :message="form.errors.date" />
+                            <InputLabel for="primer_apellido" value="Primer Apellido" />
+                            <TextInput id="primer_apellido" v-model="form.primer_apellido" type="text" class="mt-1 block w-full" />
+                            <InputError class="mt-2" :message="form.errors.primer_apellido" />
+                        </div>
+                        <div>
+                            <InputLabel for="segundo_apellido" value="Segundo Apellido" />
+                            <TextInput id="segundo_apellido" v-model="form.segundo_apellido" type="text" class="mt-1 block w-full" />
+                            <InputError class="mt-2" :message="form.errors.segundo_apellido" />
+                        </div>
+                        <div>
+                            <InputLabel for="fecha_entrada" value="Fecha de Ingreso" />
+                            <TextInput id="fecha_entrada" v-model="form.fecha_entrada" type="date" class="mt-1 block w-full" />
+                            <InputError class="mt-2" :message="form.errors.fecha_entrada" />
                         </div>
                         <div>
                             <InputLabel for="cargo_id" value="Cargo" />
-                            <select v-model="form.cargo_id" class="rounded-md w-full border-gray-50">
+                            <select v-model="form.cargo_id" class="rounded-md w-full border-gray-300">
                                 <option value="" selected disabled>Seleccionar una opcion</option>
                                 <option v-for="c in cargos" :key="c.id" :value="c.id">{{ c.des_cargo }}</option>
                             </select>
@@ -77,7 +89,7 @@ const submit = () => {
                         </div>
                         <div>
                             <InputLabel for="genero_id" value="Genero" />
-                            <select v-model="form.genero_id" class="rounded-md w-full border-gray-50">
+                            <select v-model="form.genero_id" class="rounded-md w-full border-gray-300">
                                 <option value="" selected disabled>Seleccionar una opcion</option>
                                 <option v-for="g in generos" :key="g.id" :value="g.id">{{ g.des_genero }}</option>
                             </select>

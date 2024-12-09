@@ -1,6 +1,6 @@
 <script setup>
 
-import { useForm } from '@inertiajs/vue3';
+import { useForm, Link } from '@inertiajs/vue3';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
@@ -10,9 +10,11 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 
 const form = useForm({
     cedula: '',
-    nombre: '',
-    apellido: '',
-    date: '',
+    primer_nombre: '',
+    segundo_nombre: '',
+    primer_apellido: '',
+    segundo_apellido: '',
+    fecha_entrada: '',
     cargo_id: '',
     genero_id: '',
 
@@ -49,19 +51,29 @@ const props = defineProps({
                             <InputError class="mt-2" :message="form.errors.cedula" />
                         </div>
                         <div>
-                            <InputLabel for="nombre" value="Nombre" />
-                            <TextInput id="nombre" v-model="form.nombre" type="text" class="mt-1 block w-full" />
-                            <InputError class="mt-2" :message="form.errors.nombre" />
+                            <InputLabel for="primer_nombre" value="Primer Nombre" />
+                            <TextInput id="primer_nombre" v-model="form.primer_nombre" type="text" class="mt-1 block w-full" />
+                            <InputError class="mt-2" :message="form.errors.primer_nombre" />
                         </div>
                         <div>
-                            <InputLabel for="apellido" value="Apellido" />
-                            <TextInput id="apellido" v-model="form.apellido" type="text" class="mt-1 block w-full" />
-                            <InputError class="mt-2" :message="form.errors.apellido" />
+                            <InputLabel for="segundo_nombre" value="Segundo Nombre" />
+                            <TextInput id="segundo_nombre" v-model="form.segundo_nombre" type="text" class="mt-1 block w-full" />
+                            <InputError class="mt-2" :message="form.errors.segundo_nombre" />
                         </div>
                         <div>
-                            <InputLabel for="date" value="Fecha" />
-                            <TextInput id="date" v-model="form.date" type="date" class="mt-1 block w-full" />
-                            <InputError class="mt-2" :message="form.errors.date" />
+                            <InputLabel for="primer_apellido" value="Primer Apellido" />
+                            <TextInput id="primer_apellido" v-model="form.primer_apellido" type="text" class="mt-1 block w-full" />
+                            <InputError class="mt-2" :message="form.errors.primer_apellido" />
+                        </div>
+                        <div>
+                            <InputLabel for="segundo_apellido" value="Segundo Apellido" />
+                            <TextInput id="segundo_apellido" v-model="form.segundo_apellido" type="text" class="mt-1 block w-full" />
+                            <InputError class="mt-2" :message="form.errors.segundo_apellido" />
+                        </div>
+                        <div>
+                            <InputLabel for="fecha_entrada" value="Fecha de Ingreso" />
+                            <TextInput id="fecha_entrada" v-model="form.fecha_entrada" type="date" class="mt-1 block w-full" />
+                            <InputError class="mt-2" :message="form.errors.fecha_entrada" />
                         </div>
                         <div>
                             <InputLabel for="cargo_id" value="Cargo" />
@@ -84,9 +96,10 @@ const props = defineProps({
 
 
                     <div class="flex items-center justify-end mt-4">
-                        <PrimaryButton class="ms-4">
-                            Registrar
-                        </PrimaryButton>
+                        <PrimaryButton>Registrar</PrimaryButton>
+                        <Link :href="route('empleado.index')" class="btn-white mx-3 px-4 py-2">
+                        Cancelar
+                        </Link>
                     </div>
 
                 </form>

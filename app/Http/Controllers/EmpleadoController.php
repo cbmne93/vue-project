@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Cargo;
 use App\Models\Genero;
 use App\Models\Empleado;
-use Illuminate\Http\Request;
 use App\Http\Requests\Empleado\StoreRequest;
 use App\Http\Requests\Empleado\UpdateRequest;
 
@@ -28,14 +27,17 @@ class EmpleadoController extends Controller
         if (request('search')) {
             $empleados->where(function ($query) {
                 $query->orWhere('cedula', 'like', "%" . request('search') . "%");
-                $query->orWhere('nombre', 'like', "%" . request('search') . "%");
+                $query->orWhere('primer_nombre', 'like', "%" . request('search') . "%");
+                $query->orWhere('segundo_nombre', 'like', "%" . request('search') . "%");
+                $query->orWhere('primer_apellido', 'like', "%" . request('search') . "%");
+                $query->orWhere('segundo_apellido', 'like', "%" . request('search') . "%");
             });
         }
         if (request('date_from') && request('date_to')) {
-            $empleados->whereBetween('date', [date(request('date_from')), date(request('date_to'))]);
+            $empleados->whereBetween('fecha_entrada', [date(request('date_from')), date(request('date_to'))]);
         }
 
-        $empleados = $empleados->with('cargo', 'genero')->paginate(8);
+        $empleados = $empleados->with('cargo', 'genero')->orderBy('id','desc')->paginate(8);
 
         return inertia("Empleado/Index", [
             'empleados' => $empleados,
@@ -56,7 +58,7 @@ class EmpleadoController extends Controller
     public function store(StoreRequest $request)
     {
         Empleado::create($request->validated());
-        return to_route('empleado.index')->with('message', 'REGISTRO CREADO!');
+        return to_route('empleado.index')->with('message', 'REGISTRO CREADO CON EXITO!');
     }
 
 
@@ -77,11 +79,7 @@ class EmpleadoController extends Controller
     {
         $empleado->update($request->validated());
 
-        return to_route('empleado.index')->with('message', 'REGISTRO ACTUALIZADO!');
+        return to_route('empleado.index')->with('message', 'REGISTRO ACTUALIZADO CON EXITO!');
     }
 
-    public function destroy(Empleado $empleado)
-    {
-        //
-    }
 }

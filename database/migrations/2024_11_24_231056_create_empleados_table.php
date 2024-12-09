@@ -15,10 +15,11 @@ return new class extends Migration
         Schema::create('empleados', function (Blueprint $table) {
             $table->id();
             $table->string('cedula');
-            $table->string('nombre');
-            $table->string('apellido');
-            $table->string('date')->default(Carbon::now());
-            $table->string('image')->nullable();
+            $table->string('primer_nombre');
+            $table->string('segundo_nombre')->nullable();
+            $table->string('primer_apellido');
+            $table->string('segundo_apellido')->nullable();
+            $table->string('fecha_entrada')->default(Carbon::now());
             $table->foreignId('cargo_id')->constrained();
             $table->foreignId('genero_id')->constrained();
             $table->timestamps();

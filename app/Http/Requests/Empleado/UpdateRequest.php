@@ -25,9 +25,11 @@ class UpdateRequest extends FormRequest
             
 
             'cedula' => 'required|min:2|unique:empleados,cedula,'.$this->route('empleado')->id,
-            'nombre' => 'required',
-            'apellido' => 'required',
-            'date' => 'required',
+            'primer_nombre' => 'required',
+            'segundo_nombre' => 'nullable',
+            'primer_apellido' => 'required',
+            'segundo_apellido' => 'nullable',
+            'fecha_entrada' => 'required',
             'cargo_id' => 'required',
             'genero_id' => 'required',
         ];

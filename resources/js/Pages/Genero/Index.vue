@@ -41,7 +41,7 @@ export default {
             <div class="card">
 
                 <!-- BOTON CREAR -->
-                <div class="flex items-center justify-end mt-2">
+                <div class="flex items-center justify-start mt-2">
                     <Link :href="route('genero.create')" class="btn-nuevo">
                     Nuevo
                     </Link>
